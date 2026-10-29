@@ -1,0 +1,34 @@
+{
+  "traces": [
+    {
+      "trace_id": "inc-retrieval-error",
+      "expected_failure_layer": "retrieval",
+      "tags": ["incident"],
+      "spans": [
+        {"span_id": "1", "name": "api.request", "parent_id": null, "start_ms": 0, "end_ms": 500, "attributes": {}},
+        {"span_id": "2", "name": "agent.retrieve", "parent_id": "1", "start_ms": 10, "end_ms": 200, "attributes": {"error": true, "status": "error"}},
+        {"span_id": "3", "name": "llm.generate", "parent_id": "1", "start_ms": 210, "end_ms": 400, "attributes": {}}
+      ]
+    },
+    {
+      "trace_id": "inc-output-validation",
+      "expected_failure_layer": "output_validation",
+      "tags": ["incident"],
+      "spans": [
+        {"span_id": "1", "name": "api.request", "parent_id": null, "start_ms": 0, "end_ms": 900, "attributes": {}},
+        {"span_id": "2", "name": "llm.generate", "parent_id": "1", "start_ms": 50, "end_ms": 600, "attributes": {}},
+        {"span_id": "3", "name": "output.validate", "parent_id": "1", "start_ms": 610, "end_ms": 650, "attributes": {"error": true, "status": "error"}}
+      ]
+    },
+    {
+      "trace_id": "inc-generation-slow",
+      "expected_failure_layer": "generation",
+      "tags": ["incident"],
+      "spans": [
+        {"span_id": "1", "name": "api.request", "parent_id": null, "start_ms": 0, "end_ms": 2000, "attributes": {}},
+        {"span_id": "2", "name": "agent.retrieve", "parent_id": "1", "start_ms": 5, "end_ms": 80, "attributes": {}},
+        {"span_id": "3", "name": "llm.generate", "parent_id": "1", "start_ms": 90, "end_ms": 1900, "attributes": {"status": "ok"}}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "traces": [
+    {
+      "trace_id": "tr-refund-ok",
+      "tags": ["happy_path"],
+      "spans": [
+        {"span_id": "1", "name": "api.request", "parent_id": null, "start_ms": 0, "end_ms": 1200, "attributes": {"tokens_in": 0, "tokens_out": 0, "cost_usd": 0.0}},
+        {"span_id": "2", "name": "supervisor.route", "parent_id": "1", "start_ms": 10, "end_ms": 40, "attributes": {}},
+        {"span_id": "3", "name": "agent.retrieve", "parent_id": "2", "start_ms": 45, "end_ms": 220, "attributes": {"tokens_in": 50, "tokens_out": 0, "cost_usd": 0.0001}},
+        {"span_id": "4", "name": "llm.generate", "parent_id": "2", "start_ms": 230, "end_ms": 900, "attributes": {"tokens_in": 1200, "tokens_out": 180, "cost_usd": 0.002}},
+        {"span_id": "5", "name": "output.validate", "parent_id": "2", "start_ms": 910, "end_ms": 950, "attributes": {}}
+      ]
+    },
+    {
+      "trace_id": "tr-shipping-ok",
+      "tags": ["happy_path"],
+      "spans": [
+        {"span_id": "1", "name": "api.request", "parent_id": null, "start_ms": 0, "end_ms": 800, "attributes": {}},
+        {"span_id": "2", "name": "agent.retrieve", "parent_id": "1", "start_ms": 5, "end_ms": 150, "attributes": {"tokens_in": 40, "cost_usd": 0.00005}},
+        {"span_id": "3", "name": "llm.generate", "parent_id": "1", "start_ms": 160, "end_ms": 700, "attributes": {"tokens_in": 900, "tokens_out": 120, "cost_usd": 0.0015}}
+      ]
+    }
+  ]
+}

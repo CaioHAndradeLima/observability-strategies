@@ -1,0 +1,17 @@
+{
+  "canary_id": "release-candidate-001",
+  "baseline_metrics": {
+    "recall_at_k": 0.75,
+    "ndcg_at_k": 0.7,
+    "labeled_hit_rate": 0.85,
+    "groundedness_rate": 0.85,
+    "citation_alignment_rate": 0.85,
+    "abstain_correct_rate": 0.85
+  },
+  "tolerances": {
+    "recall_at_k": 0.15,
+    "ndcg_at_k": 0.15,
+    "groundedness_rate": 0.1,
+    "abstain_correct_rate": 0.15
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "cases": [
+    {
+      "id": "refund-timing",
+      "query": "How long do refunds take?",
+      "retrieved_doc_ids": ["doc-refund-policy", "doc-shipping-sla"],
+      "relevant_doc_ids": ["doc-refund-policy"],
+      "answer_text": "Refunds are processed within 5 business days after approval [doc-refund-policy].",
+      "citations": ["doc-refund-policy"],
+      "expected_abstain": false,
+      "expected_grounded": true,
+      "tags": ["retrieval", "answer"]
+    },
+    {
+      "id": "shipping-sla",
+      "query": "Standard domestic shipping time?",
+      "retrieved_doc_ids": ["doc-shipping-sla", "doc-refund-policy"],
+      "relevant_doc_ids": ["doc-shipping-sla"],
+      "answer_text": "Domestic standard shipping takes 3 to 5 business days [doc-shipping-sla].",
+      "citations": ["doc-shipping-sla"],
+      "expected_abstain": false,
+      "expected_grounded": true,
+      "tags": ["retrieval", "answer"]
+    },
+    {
+      "id": "enterprise-pricing",
+      "query": "What is included in enterprise?",
+      "retrieved_doc_ids": ["doc-pricing-tier", "doc-security-tools"],
+      "relevant_doc_ids": ["doc-pricing-tier"],
+      "answer_text": "Enterprise includes unlimited seats and dedicated support [doc-pricing-tier].",
+      "citations": ["doc-pricing-tier"],
+      "expected_abstain": false,
+      "expected_grounded": true,
+      "rubric_scores": {"faithfulness": 0.9, "completeness": 0.85, "style": 0.8},
+      "tags": ["judge"]
+    },
+    {
+      "id": "security-tools",
+      "query": "Which security tools are approved?",
+      "retrieved_doc_ids": ["doc-security-tools", "doc-pricing-tier"],
+      "relevant_doc_ids": ["doc-security-tools"],
+      "answer_text": "Approved tools are listed in the security catalog [doc-security-tools].",
+      "citations": ["doc-security-tools"],
+      "expected_abstain": false,
+      "expected_grounded": true,
+      "tags": ["retrieval"]
+    },
+    {
+      "id": "abstain-unknown",
+      "query": "What is the capital of Mars?",
+      "retrieved_doc_ids": ["doc-refund-policy"],
+      "relevant_doc_ids": [],
+      "answer_text": "I do not have enough information to answer that.",
+      "citations": [],
+      "expected_abstain": true,
+      "expected_grounded": true,
+      "tags": ["abstain"]
+    },
+    {
+      "id": "poor-retrieval-miss",
+      "query": "Refund policy details",
+      "retrieved_doc_ids": ["doc-shipping-sla"],
+      "relevant_doc_ids": ["doc-refund-policy"],
+      "answer_text": "I cannot answer without the refund policy document.",
+      "citations": [],
+      "expected_abstain": true,
+      "expected_grounded": true,
+      "tags": ["poor_retrieval"]
+    },
+    {
+      "id": "multi-relevant",
+      "query": "Refund and shipping overview",
+      "retrieved_doc_ids": ["doc-refund-policy", "doc-shipping-sla", "doc-pricing-tier"],
+      "relevant_doc_ids": ["doc-refund-policy", "doc-shipping-sla"],
+      "answer_text": "Refunds take 5 days; shipping is 3-5 days [doc-refund-policy][doc-shipping-sla].",
+      "citations": ["doc-refund-policy", "doc-shipping-sla"],
+      "expected_abstain": false,
+      "expected_grounded": true,
+      "tags": ["retrieval", "answer"]
+    },
+    {
+      "id": "citation-align",
+      "query": "Enterprise support level",
+      "retrieved_doc_ids": ["doc-pricing-tier"],
+      "relevant_doc_ids": ["doc-pricing-tier"],
+      "answer_text": "Dedicated support is included [doc-pricing-tier].",
+      "citations": ["doc-pricing-tier"],
+      "expected_abstain": false,
+      "expected_grounded": true,
+      "tags": ["answer"]
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "profiles": {
+    "ci-all-strategies": {
+      "description": "Compare retrieval_only, e2e_offline, and judge_augmented on the golden set.",
+      "strategies": ["retrieval_only", "e2e_offline", "judge_augmented"],
+      "gates": {
+        "retrieval_only": {
+          "min_recall_at_k": 0.7,
+          "min_ndcg_at_k": 0.65
+        },
+        "e2e_offline": {
+          "min_recall_at_k": 0.7,
+          "min_groundedness_rate": 0.85
+        },
+        "judge_augmented": {
+          "min_judge_pass_rate": 0.8
+        }
+      }
+    },
+    "ci-observability-eval": {
+      "description": "Observability pipeline scorecard: retrieval + answer metrics + incident/canary scenarios.",
+      "strategies": ["e2e_offline"],
+      "gates": {
+        "e2e_offline": {
+          "min_recall_at_k": 0.7,
+          "min_ndcg_at_k": 0.65,
+          "min_labeled_hit_rate": 0.85,
+          "min_groundedness_rate": 0.85,
+          "min_citation_alignment_rate": 0.85,
+          "min_abstain_correct_rate": 0.85,
+          "max_mean_latency_ms": 1500.0
+        }
+      },
+      "scenario_gates": {
+        "min_layer_match_rate": 0.65,
+        "min_canary_pass": 1.0
+      }
+    },
+    "ci-pipeline-only": {
+      "description": "Smoke profile for e2e_offline only.",
+      "strategies": ["e2e_offline"],
+      "gates": {
+        "e2e_offline": {
+          "min_recall_at_k": 0.65
+        }
+      }
+    }
+  }
+}

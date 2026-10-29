@@ -1,0 +1,30 @@
+{
+  "runs": [
+    {
+      "case_id": "refund-timing",
+      "strategy": "e2e_offline",
+      "retrieved_doc_ids": ["doc-refund-policy", "doc-shipping-sla"],
+      "answer_text": "Refunds are processed within 5 business days after approval [doc-refund-policy].",
+      "citations": ["doc-refund-policy"],
+      "output_valid": true,
+      "trace_id": "tr-refund-ok"
+    },
+    {
+      "case_id": "shipping-sla",
+      "strategy": "e2e_offline",
+      "retrieved_doc_ids": ["doc-shipping-sla", "doc-refund-policy"],
+      "answer_text": "Domestic standard shipping takes 3 to 5 business days [doc-shipping-sla].",
+      "citations": ["doc-shipping-sla"],
+      "output_valid": true,
+      "trace_id": "tr-shipping-ok"
+    },
+    {
+      "case_id": "poor-retrieval-miss",
+      "strategy": "retrieval_only",
+      "retrieved_doc_ids": ["doc-shipping-sla"],
+      "answer_text": "I cannot answer without the refund policy document.",
+      "citations": [],
+      "output_valid": true
+    }
+  ]
+}
