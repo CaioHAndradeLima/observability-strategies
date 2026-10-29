@@ -12,7 +12,10 @@ RUBRIC_DIMENSIONS = ("faithfulness", "completeness", "style")
 def offline_rubric_score(case: EvalCase) -> dict:
     scores = case.rubric_scores or {}
     if not scores:
-        scores = {d: 0.85 if case.expected_grounded and not case.expected_abstain else 0.4 for d in RUBRIC_DIMENSIONS}
+        if case.expected_abstain:
+            scores = {d: 0.9 for d in RUBRIC_DIMENSIONS}
+        else:
+            scores = {d: 0.85 if case.expected_grounded else 0.4 for d in RUBRIC_DIMENSIONS}
     dim_vals = [float(scores.get(d, 0.0)) for d in RUBRIC_DIMENSIONS]
     mean = sum(dim_vals) / len(dim_vals)
     return {
